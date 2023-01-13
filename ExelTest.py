@@ -9,6 +9,8 @@ import smtplib
 
 #dat=input ("Ingrese Año y Mes: (AAAA/MM): ")
 dat="2023/01"
+
+#Funcion para establecer si el dia es sabado o domingo. Solo en ese caso de True continua.
 def datesod (dia):
     fecha=dat+"/"+str(dia)
 # convert yyyy-mm-dd string to date object
@@ -20,7 +22,8 @@ def datesod (dia):
         print ("*** Domingo "+str(dt_object.day)    +" ***")
     if x==5 or x==6:
         return True
-        
+
+#Funcion que imprime cada dia del fin de semana con los respectivos inspectores que trabajan y sus posiciones.        
 def finde(tabla,hoy):
     control=["Ctrl 0/7", "Ctrl 7/16" ,"Ctrl 16/24" , "Vol 0/7", "Vol 7/16", "Vol 16/24"]
     
@@ -36,7 +39,8 @@ def finde(tabla,hoy):
                 if not item in trab:
                     print (item, " SIN CUBRIR")
             print("-"*20) 
-            
+
+#Funcion que imprime por cada inspector los Francos y pociciones segun el dia. 
 def francos(tabla):
     for j in range (1,len(tabla[0])):
         cont=0
@@ -53,7 +57,8 @@ def francos(tabla):
             print(6-cont," franco a trabajar")
         print ("="*15)   
         print("\n")
-               
+
+#Funcion que toma los datos y los envia por mail a cada inspector. (falta crear una cuenta de mail y la base de datos con los mails de los inspectores"
 def send_mail(msg, reciever):
    date=datetime.today()
    email= MIMEMultipart()
@@ -62,7 +67,7 @@ def send_mail(msg, reciever):
    msg["Subject"]="Francos ",date.year,"/",date.month
    password=""
    
-        
+#Aca se genera el objeto de la hoja de calculo y se guarda en una lista llamada "tabla"
 wb=xl.Workbook()
 wb=xl.load_workbook("hoja_de_prueba.xlsx")
 hoja = wb.active
@@ -78,7 +83,7 @@ for i in range(1,max_row+1):
 
 
 hoy=datetime.today() 
-  
+
 #finde(tabla,hoy)
 
 francos(tabla)
