@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import os
 import openpyxl as xl
 from datetime import datetime
 from email.mime.multipart import MIMEMultipart
@@ -7,8 +7,10 @@ from email.mime.text import MIMEText
 import smtplib
 
 
-#dat=input ("Ingrese Año y Mes: (AAAA/MM): ")
 dat="2023/01"
+
+def clear_screen():
+    os.system("cls" if os.name== "nt" else "clear")
 
 #Funcion para establecer si el dia es sabado o domingo. Solo en ese caso de True continua.
 def datesod (dia):
@@ -83,12 +85,33 @@ for i in range(1,max_row+1):
 
 
 hoy=datetime.today() 
+opcion=""
+opcion= input ("""Elija opcion:
+1) Imprimir lista de francos.
+2) Imprimir fin de semana.
+3) Salir
+""")
 
-#finde(tabla,hoy)
+while opcion!="3":
+    opcion= input ("""Elija opcion:
+1) Imprimir lista de francos.
+2) Imprimir fin de semana.
+3) Salir
+""")
+    if opcion=="1":
+        clear_screen()
+        francos(tabla)
+    elif opcion=="2":
+        clear_screen()    
+        finde(tabla,hoy)
+    elif opcion=="3":
+        clear_screen()
+        print ("Hasta la próxima")
+    else:
+        print ("Opcion invalida")
+     
 
-francos(tabla)
 
 #msg="Mensaje de Prueba<br>Prueba de salto de linea"
 #send_mail(msg)
-print ("Fin")
 
