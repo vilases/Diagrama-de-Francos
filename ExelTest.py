@@ -1,4 +1,4 @@
-#!
+#!/usr/bin/env python3
 
 import openpyxl as xl
 from datetime import datetime
